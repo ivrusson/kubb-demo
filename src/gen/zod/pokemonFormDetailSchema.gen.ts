@@ -1,0 +1,7 @@
+import { pokemonSummarySchema } from "./pokemonSummarySchema.gen";
+import { versionGroupSummarySchema } from "./versionGroupSummarySchema.gen";
+import { z } from "@/utils/zod.ts";
+
+
+export const pokemonFormDetailSchema = z.object({ "id": z.number().int(), "name": z.string().max(100), "order": z.number().int().optional().nullable(), "form_order": z.number().int().optional().nullable(), "is_default": z.boolean().optional(), "is_battle_only": z.boolean().optional(), "is_mega": z.boolean().optional(), "form_name": z.string().max(30), "pokemon": z.lazy(() => pokemonSummarySchema), "sprites": z.object({ "default": z.string().url().optional() }).catchall(z.string().url().nullable()), "version_group": z.lazy(() => versionGroupSummarySchema), "form_names": z.array(z.object({ "language": z.object({ "name": z.string(), "url": z.string().url() }), "name": z.string() })), "names": z.array(z.object({ "language": z.object({ "name": z.string(), "url": z.string().url() }), "name": z.string() })), "types": z.array(z.object({ "slot": z.number().int(), "type": z.object({ "name": z.string(), "url": z.string().url() }) })) });
+export type PokemonFormDetailSchema = z.infer<typeof pokemonFormDetailSchema>;

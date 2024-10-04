@@ -1,0 +1,7 @@
+import { locationSummarySchema } from "./locationSummarySchema.gen";
+import { locationAreaNameSchema } from "./locationAreaNameSchema.gen";
+import { z } from "@/utils/zod.ts";
+
+
+export const locationAreaDetailSchema = z.object({ "id": z.number().int(), "name": z.string().max(100), "game_index": z.number().int(), "encounter_method_rates": z.array(z.object({ "encounter_method": z.object({ "name": z.string(), "url": z.string().url() }), "version_details": z.array(z.object({ "rate": z.number().int(), "version": z.object({ "name": z.string(), "url": z.string().url() }) })) })), "location": z.lazy(() => locationSummarySchema), "names": z.array(z.lazy(() => locationAreaNameSchema)), "pokemon_encounters": z.array(z.object({ "pokemon": z.object({ "name": z.string(), "url": z.string().url() }), "version_details": z.array(z.object({ "version": z.object({ "name": z.string(), "url": z.string().url() }), "max_chance": z.number().int(), "encounter_details": z.object({ "min_level": z.number().int(), "max_level": z.number().int(), "condition_values": z.object({ "name": z.string(), "url": z.string().url() }).optional(), "chance": z.number().int(), "method": z.object({ "name": z.string(), "url": z.string().url() }) }) })) })) });
+export type LocationAreaDetailSchema = z.infer<typeof locationAreaDetailSchema>;

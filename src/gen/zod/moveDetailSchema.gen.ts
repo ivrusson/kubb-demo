@@ -1,0 +1,16 @@
+import { contestTypeSummarySchema } from "./contestTypeSummarySchema.gen";
+import { contestEffectSummarySchema } from "./contestEffectSummarySchema.gen";
+import { moveDamageClassSummarySchema } from "./moveDamageClassSummarySchema.gen";
+import { generationSummarySchema } from "./generationSummarySchema.gen";
+import { moveMetaSchema } from "./moveMetaSchema.gen";
+import { moveNameSchema } from "./moveNameSchema.gen";
+import { moveChangeSchema } from "./moveChangeSchema.gen";
+import { superContestEffectSummarySchema } from "./superContestEffectSummarySchema.gen";
+import { moveTargetSummarySchema } from "./moveTargetSummarySchema.gen";
+import { typeSummarySchema } from "./typeSummarySchema.gen";
+import { moveFlavorTextSchema } from "./moveFlavorTextSchema.gen";
+import { z } from "@/utils/zod.ts";
+
+
+export const moveDetailSchema = z.object({ "id": z.number().int(), "name": z.string().max(100), "accuracy": z.number().int().optional().nullable(), "effect_chance": z.number().int(), "pp": z.number().int().optional().nullable(), "priority": z.number().int().optional().nullable(), "power": z.number().int().optional().nullable(), "contest_combos": z.object({ "normal": z.object({ "use_before": z.array(z.object({ "name": z.string(), "url": z.string().url() })).nullable(), "use_after": z.array(z.object({ "name": z.string(), "url": z.string().url() })).nullable() }), "super": z.object({ "use_before": z.array(z.object({ "name": z.string(), "url": z.string().url() })).nullable(), "use_after": z.array(z.object({ "name": z.string(), "url": z.string().url() })).nullable() }) }), "contest_type": z.lazy(() => contestTypeSummarySchema), "contest_effect": z.lazy(() => contestEffectSummarySchema), "damage_class": z.lazy(() => moveDamageClassSummarySchema), "effect_entries": z.array(z.object({ "effect": z.string(), "short_effect": z.string(), "language": z.object({ "name": z.string(), "url": z.string().url() }) })), "effect_changes": z.array(z.object({ "effect_entries": z.array(z.object({ "effect": z.string(), "language": z.object({ "name": z.string(), "url": z.string().url() }) })), "version_group": z.object({ "name": z.string(), "url": z.string().url() }) })), "generation": z.lazy(() => generationSummarySchema), "meta": z.lazy(() => moveMetaSchema), "names": z.array(z.lazy(() => moveNameSchema)), "past_values": z.array(z.lazy(() => moveChangeSchema)), "stat_changes": z.array(z.object({ "change": z.number().int(), "stat": z.object({ "name": z.string(), "url": z.string().url() }) })), "super_contest_effect": z.lazy(() => superContestEffectSummarySchema), "target": z.lazy(() => moveTargetSummarySchema), "type": z.lazy(() => typeSummarySchema), "machines": z.array(z.object({ "machine": z.object({ "url": z.string().url() }), "version_group": z.object({ "name": z.string(), "url": z.string().url() }) })), "flavor_text_entries": z.array(z.lazy(() => moveFlavorTextSchema)), "learned_by_pokemon": z.array(z.object({ "name": z.string(), "url": z.string().url() })) });
+export type MoveDetailSchema = z.infer<typeof moveDetailSchema>;

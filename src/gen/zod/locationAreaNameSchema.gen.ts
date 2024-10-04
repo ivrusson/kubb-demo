@@ -1,0 +1,6 @@
+import { languageSummarySchema } from "./languageSummarySchema.gen";
+import { z } from "@/utils/zod.ts";
+
+
+export const locationAreaNameSchema = z.object({ "name": z.string().max(100), "language": z.lazy(() => languageSummarySchema) });
+export type LocationAreaNameSchema = z.infer<typeof locationAreaNameSchema>;

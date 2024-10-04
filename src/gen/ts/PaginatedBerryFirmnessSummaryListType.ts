@@ -1,0 +1,20 @@
+import type { BerryFirmnessSummaryType } from "./BerryFirmnessSummaryType";
+
+ export type PaginatedBerryFirmnessSummaryListType = {
+    /**
+     * @type integer | undefined
+    */
+    count?: number;
+    /**
+     * @type string, uri
+    */
+    next?: string | null;
+    /**
+     * @type string, uri
+    */
+    previous?: string | null;
+    /**
+     * @type array | undefined
+    */
+    results?: BerryFirmnessSummaryType[];
+};

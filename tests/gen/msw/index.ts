@@ -1,0 +1,12 @@
+export * from "./handlers";
+export * as pokemonHandlers from "./pokemonHandlers/index";
+export * as berriesHandlers from "./berriesHandlers/index";
+export * as contestsHandlers from "./contestsHandlers/index";
+export * as encountersHandlers from "./encountersHandlers/index";
+export * as evolutionHandlers from "./evolutionHandlers/index";
+export * as gamesHandlers from "./gamesHandlers/index";
+export * as itemsHandlers from "./itemsHandlers/index";
+export * as utilityHandlers from "./utilityHandlers/index";
+export * as locationHandlers from "./locationHandlers/index";
+export * as machinesHandlers from "./machinesHandlers/index";
+export * as movesHandlers from "./movesHandlers/index";

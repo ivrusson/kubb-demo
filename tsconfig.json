@@ -5,6 +5,10 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": [
+      "vitest/globals", 
+      "@kubb/core/globals"
+    ],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -26,6 +30,7 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["./src/**/*", "./templates/**/*", "./tests/**/*"],
+  "exclude": ["**/node_modules", "**/types/**", "**/mocks/**"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
