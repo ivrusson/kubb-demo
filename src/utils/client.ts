@@ -29,7 +29,7 @@ export type ResponseConfig<TData = unknown> = {
 }
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://pokeapi.co',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {},
 })
 
